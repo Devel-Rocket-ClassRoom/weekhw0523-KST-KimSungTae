@@ -51,13 +51,16 @@ void Homework02_Run()
 
 void Homework03_Run()
 {
-    int Startmoney = 10000;
-    int bet = 100;
+    unsigned long long int Startmoney = 10000;
+    unsigned long long int bet = 100;
+    int slut1 = 0;
+    int slut2 = 0;
+    int slut3 = 0;
 
     srand(time(0));
     while (Startmoney>=100)
     {
-        printf("현재 소지금 : %d원\n", Startmoney);
+        printf("현재 소지금 : %lld원\n", Startmoney);
         printf("배팅할 금액 입력 :\n");
         cin >> bet;
         if (bet < 100)
@@ -66,7 +69,29 @@ void Homework03_Run()
             printf("배팅할 금액 입력 :\n");
             cin >> bet;
         }
-        printf("\n현재 배팅금 : %d원\n", bet);
+        printf("\n현재 배팅금 : %lld원\n", bet);
+        
+
+        slut1 = rand() % 10;
+        slut2 = rand() % 10;
+        slut3 = rand() % 10;
+
+        if (slut1 == slut2 && slut2 == slut3)
+        {
+            if (slut1 != 7)
+            {
+                printf("같은 숫자가 3개입니다.\n");
+                printf("배팅한 금액 %lld의 50배인 %lld를 받습니다.\n", bet, 50 * bet);
+                Startmoney = Startmoney + 49 * bet;
+            }
+            else if (slut1 == 7)
+            {
+                printf("7이 3개입니다.\n");
+                printf("배팅한 금액 %lld의 10000배인 %lld를 받습니다.\n", bet, 10000 * bet);
+                Startmoney = Startmoney + 9999 * bet;
+            }
+
+        }
 
     }
 
