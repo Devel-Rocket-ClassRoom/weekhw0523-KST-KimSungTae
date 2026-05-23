@@ -295,12 +295,17 @@ int Maze[MazeRows][MazeCols] =
     {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}
 };
 
+
+
+
 void Homework05_Run() {
     char Selectkey;
+    srand(time(0));
 
 	int PlayerX = 1;
 	int PlayerY = 1;
 	int PlayerLocatition = Maze[PlayerY][PlayerX];
+
 
 
     while (true)
@@ -418,5 +423,97 @@ void Homework05_Run() {
 				Selectkey = _getch();
             }
         }
+
+
+		//적과의 전투
+
+        int PlayerHP = 100;
+        int EnemyHP = 100;
+        int EncounterChance = 0;
+        int CriticalChance = 0;
+		int BattleTurn = 1;
+
+        if (PlayerLocatition == 0)
+        {
+			EncounterChance = rand() % 10;
+            if (EncounterChance == 0)
+            {
+                system("cls");
+
+                printf("적과 조우했습니다! 전투 시작!\n");
+
+                while (PlayerHP > 0 && EnemyHP > 0)
+                {
+                    int PlayerDamage = rand() % 11 + 5;
+                    int EnemyDamage = rand() % 11 + 5;
+
+                    if (BattleTurn %2== 1)
+                    {
+                        printf("=======현재 턴 %d=========\n", BattleTurn);
+                        printf("플레이어 HP: %d, 적 HP: %d\n", PlayerHP, EnemyHP);
+                        printf("=========================\n");
+                        if (rand() % 10 < 1) //10% 확률로 크리티컬
+                        {
+                            
+                            printf("플레이어의 크리티컬 히트! %d의 두배인 %d데미지를 주었음. \n", PlayerDamage, PlayerDamage*2);
+                            PlayerDamage = PlayerDamage * 2;
+                            EnemyHP = EnemyHP - PlayerDamage;
+                            BattleTurn++;
+                            _getch();
+                        }
+                        else
+                        {
+                            printf("플레이어의 공격 히트! %d의 데미지를 주었음. \n", PlayerDamage);
+                            EnemyHP = EnemyHP - PlayerDamage;
+                            BattleTurn++;
+                            _getch();
+                        }
+                        if (EnemyHP <= 0)
+                        {
+							break;
+                        }
+                    }
+                    if (BattleTurn %2 == 0)
+                    {
+                        printf("=======현재 턴 %d=========\n", BattleTurn);
+						printf("플레이어 HP: %d, 적 HP: %d\n", PlayerHP, EnemyHP);
+                        printf("=========================\n");
+                        if (rand() % 10 < 1) //10% 확률로 크리티컬
+                        {
+                            
+                            printf("적의 크리티컬 히트! %d의 두배인 %d데미지를 받았음. \n", EnemyDamage, EnemyDamage * 2);
+                            EnemyDamage = EnemyDamage * 2;
+                            PlayerHP = PlayerHP - EnemyDamage;
+                            BattleTurn++;
+                            _getch();
+                        }
+                        else
+                        {
+                            printf("적의 공격 히트! %d의 데미지를 받았음. \n", EnemyDamage);
+                            PlayerHP = PlayerHP - EnemyDamage;
+							BattleTurn++;
+                            _getch();
+                        }
+                        if (PlayerHP <= 0)
+                        {
+                            break;
+                        }
+                    }
+                }
+
+                if (PlayerHP > 0)
+                {
+                    printf("적을 물리쳤습니다!\n");
+
+                    Selectkey = _getch();
+                    continue;
+                }
+                else
+                {
+                    printf("플레이어가 패배했습니다. 게임 오버.\n");
+                    break;
+                }
+            }
+		}
     }
 }
