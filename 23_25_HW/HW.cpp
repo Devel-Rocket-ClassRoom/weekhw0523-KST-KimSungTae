@@ -61,14 +61,22 @@ void Homework03_Run()
     while (Startmoney>=100)
     {
         printf("현재 소지금 : %lld원\n", Startmoney);
-        printf("배팅할 금액 입력 :\n");
+        printf("배팅할 금액 입력 :");
         cin >> bet;
-        if (bet < 100)
+        while (1)
         {
-            printf("최소 100이상 배팅해야합니다.\n");
-            printf("배팅할 금액 입력 :\n");
-            cin >> bet;
+            if (bet > 100 && bet <= Startmoney)
+            {
+                break;
+            }
+            else
+            {
+                printf("최소 100이상, 현재소지금 내에 배팅해야합니다.\n");
+                printf("배팅할 금액 입력 :");
+                cin >> bet;
+			}
         }
+        
         printf("\n현재 배팅금 : %lld원\n", bet);
         
 
@@ -92,8 +100,15 @@ void Homework03_Run()
             }
 
         }
-
+        else
+        {
+            printf("배팅 실패.\n");
+			Startmoney = Startmoney - bet;
+        }
+        printf("=========================\n");
     }
+
+	printf("소지금이 100원 이하입니다. 게임 종료.\n");
 
 
 

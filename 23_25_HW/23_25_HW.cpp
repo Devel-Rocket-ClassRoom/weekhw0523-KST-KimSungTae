@@ -11,6 +11,9 @@ using namespace std;
 int main()
 {
 
+	SetConsoleOutputCP(65001);
+	SetConsoleCP(65001);
+
 	//Homework02_Run();
 	Homework03_Run();
 }
