@@ -13,27 +13,34 @@ using namespace std;
 */
 void Homework02_Run()
 {
-    unsigned long long int Input = 0;
-    printf("자릿수 입력 : ");
-    cin >> Input;
-    int EST = 1;
-    unsigned long long int Quotient = 0;
-    unsigned long long int SUM = 0;
-    while (EST)
+    while (1)
     {
-        SUM = SUM + Input % 10;
-        Quotient = Input / 10;
-        if (Quotient != 0)
+        unsigned long long int Input = 0;
+        printf("자릿수 입력 : ");
+        cin >> Input;
+        int EST = 1;
+        unsigned long long int Quotient = 0;
+        unsigned long long int SUM = 0;
+        while (EST)
         {
-            Input = Quotient;
-        }
-        else
-        {
-            EST = 0;
-        }
+            SUM = SUM + Input % 10;
+            Quotient = Input / 10;
+            if (Quotient != 0)
+            {
+                Input = Quotient;
+            }
+            else
+            {
+                EST = 0;
+            }
 
+        }
+        printf("자릿수의 합 : %lld\n\n", SUM);
+        if (Input == 0)
+        {
+            break;
+		}
     }
-    printf("자릿수의 합 : %lld\n\n", SUM);
 }
 
 
@@ -65,7 +72,7 @@ void Homework03_Run()
         cin >> bet;
         while (1)
         {
-            if (bet > 100 && bet <= Startmoney)
+            if (bet >= 100 && bet <= Startmoney)
             {
                 break;
             }
@@ -157,7 +164,7 @@ void Homework04_Run()
         cin >> bet;
         while (1)
         {
-            if (bet > 100 && bet <= Startmoney)
+            if (bet >= 100 && bet <= Startmoney)
             {
                 break;
             }
@@ -246,12 +253,13 @@ void Homework04_Run()
                     {
                         
                         printf("조커를 뽑았습니다. 플레이어 승리!\n");
-                        printf("배팅한 금액 %lld + %lld의 2배인 %lld를 받습니다.\n", bet, bet*3, 6 * bet);
-                        Startmoney = Startmoney + 6 * bet;
+                        printf("배팅한 금액 %lld + %lld의 2배인 %lld를 받습니다.\n", bet, bet*2, 6 * bet);
+                        Startmoney = Startmoney + 3 * bet;
                     }
                     else
                     {
                         printf("조커를 뽑지 못했습니다. 플레이어 패배.\n");
+						Startmoney = Startmoney - 3 * bet;
                     }
 
                 }
